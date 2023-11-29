@@ -32,11 +32,11 @@ const scrapeBearer = async (res) => {
         const Bearer = await page.evaluate(() => {
         return JSON.parse(localStorage.getItem('oidc.user:https://cwv.ycdes.org/newworld.cadview/:NewWorld.CadView2')).access_token});
         await browser.close()
+    
         // Print the full title
         const logStatement = `Bearer ${Bearer}`;
         console.log('we got it ');
         res.send(logStatement);
-        
       } catch (e) {
         console.error(e);
         res.send(`Something went wrong while running Puppeteer: ${e}`);
