@@ -8,7 +8,7 @@ app.get("/scrape",(req,res)=>{
     scrapeLogic(res);
 })
 app.get("/version",(req,res)=>{
-    res.send("Version 4")
+    res.send("Version 5")
 })
 
 app.get('/',(req,res)=>{
@@ -103,7 +103,6 @@ async function getActiveCalls(b){
     };
     xhr.send();
 }
-getActiveCalls()
   
 
 
@@ -123,3 +122,5 @@ const TelegramBot = require('node-telegram-bot-api');
       const chatId = msg.chat.id;
       bot.sendMessage(chatId, 'Received your message');
   });
+
+  getActiveCalls()
