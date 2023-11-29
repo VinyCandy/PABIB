@@ -72,29 +72,12 @@ async function getActiveCalls(b){
                 if (!calls[c.callId]){
                     calls[c.callId]=c
                     console.log(`[LOG] *NEW CALL** ${c.district||""} ${c.fireCallType||c.emsCallType||c.policeCallType||"Pending"}`)
-                    if (c.fireCallType=="CONTROL BURN"){
-                        messages[c.callId]='CONTROL BURN'
-                    }else{
-                        try {
-                            messages[c.callId] = sendMessage(`<b>! box ${c.district||""} ${c.fireCallType||c.emsCallType||c.policeCallType||"Pending"}</b>\n${c.location||""}\n${c.natureOfCall||""}\n${c.createDateTime||""}`,c.callId)
-                        } catch (error) {
-                            console.log('Send Error')
-                        }
-                    }
-                   
-                    
                 
                 }else{
                     var dif = diff(calls[c.callId],res[a])
                     calls[c.callId]=c
                     if (dif['fireCallType']){
-                        console.log(`[LOG] *UPDATED CALL** ${c.district} ${c.fireCallType||c.emsCallType||c.policeCallType}`)
-                        try {
-                            bot.sendMessage(-1001260432630,"UPDATE: "+dif['fireCallType'],{parse_mode: 'HTML',reply_to_message_id:messages[c.callId]})
-                        } catch (error) {
-                            console.log('Response Error')
-                        }
-                       
+                        console.log(`[LOG] *UPDATED CALL** ${c.district} ${c.fireCallType||c.emsCallType||c.policeCallType}`)                       
                     }
                 }
             }
@@ -104,23 +87,5 @@ async function getActiveCalls(b){
     xhr.send();
 }
   
-
-
-const TelegramBot = require('node-telegram-bot-api');
-  const token = process.env.BOT_TOKEN
-  const bot = new TelegramBot(token, {polling: true});
-  
-  bot.sendMessage(-1001260432630,"Starting Up",{disable_notification: true,parse_mode: 'HTML'})
-  
-  async function sendMessage(msg,newcall){
-      var msg = await bot.sendMessage(-1001260432630,msg,{parse_mode: 'HTML'})
-      messages[newcall] = msg.message_id
-  }
-  
-
-  bot.on('message', (msg) => {
-      const chatId = msg.chat.id;
-      bot.sendMessage(chatId, 'Received your message');
-  });
 
   getActiveCalls()
