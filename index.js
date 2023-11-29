@@ -108,7 +108,7 @@ getActiveCalls()
 
 
 const TelegramBot = require('node-telegram-bot-api');
-  const token = process.env.BOTTOKEN
+  const token = process.env.BOT_TOKEN
   const bot = new TelegramBot(token, {polling: true});
   
   bot.sendMessage(-1001260432630,"Starting Up",{disable_notification: true,parse_mode: 'HTML'})
