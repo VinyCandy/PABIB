@@ -8,7 +8,7 @@ app.get("/scrape",(req,res)=>{
     scrapeLogic(res);
 })
 app.get("/version",(req,res)=>{
-    res.send("Version 3")
+    res.send("Version 4")
 })
 
 app.get('/',(req,res)=>{
@@ -108,7 +108,7 @@ getActiveCalls()
 
 
 const TelegramBot = require('node-telegram-bot-api');
-  const token = '5501060647:AAGZDA3xy3E_D4_tnsNO922NXNSAJ4f11kk';
+  const token = process.env.BOTTOKEN
   const bot = new TelegramBot(token, {polling: true});
   
   bot.sendMessage(-1001260432630,"Starting Up",{disable_notification: true,parse_mode: 'HTML'})
