@@ -1,11 +1,23 @@
 const express = require("express");
-const { scrapeLogic } = require("./scrapeLogic");
+const { scrapeBearer } = require("./scrapeBearer");
+const { getActiveCalls } = require("./cadApi");
+
 const app = express()
 
 const PORT = process.env.PORT || 4000;
+var BearerToken = "erghegrirgeiu"
 
-app.get("/scrape",(req,res)=>{
-    scrapeLogic(res);
+app.get("/getbearer",(req,res)=>{
+    scrapeBearer(res);
+})
+
+app.get("/getActiveCalls",async(req,res)=>{
+    if (BearerToken==null) {await scrapeBearer({send:function(BT){BearerToken=BT}})}
+    await getActiveCalls(BearerToken,function(calls,b){
+        BearerToken = b
+        res.send(calls)
+    })
+
 })
 app.get("/version",(req,res)=>{
     res.send("Version 5")
@@ -20,6 +32,7 @@ app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
 })
 
+<<<<<<< HEAD
 var XMLHttpRequest = require('xhr2');
 var xhr = new XMLHttpRequest();
 
@@ -89,3 +102,7 @@ async function getActiveCalls(b){
   
 
   getActiveCalls()
+=======
+
+//TETS
+>>>>>>> a58f7ef8b2b6f1caadc393c089bd6671f155af93
