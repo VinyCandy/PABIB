@@ -1,7 +1,7 @@
 var XMLHttpRequest = require('xhr2');
 var xhr = new XMLHttpRequest();
 
-const { scrapeBearer } = require('./scrapeBearer')
+//const { scrapeBearer } = require('./scrapeBearer')
 
 getActiveCalls = async function (Bearer,run){
     console.log('Getting Calls')
